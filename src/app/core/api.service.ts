@@ -5,6 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+
 import { environment } from '../../environments/environment';
 import { AnyTxtRecord } from 'dns';
 const endpoint = 'http://kdrentacar.tk:8001/api/'
@@ -57,7 +58,7 @@ export class ApiService {
         for (const item of res) {
           if (item['location'] === location) {
             this.item_name=item.name
-            console.log(this.item_name)
+            //console.log(this.item_name)
             r.push(item);
           }
         }
@@ -83,7 +84,7 @@ export class ApiService {
       .map((res) => {
         const r = [];
         for (const item of res) {
-          console.log(item)
+          //console.log(item)
           r.push(item['location']);
         }
         return new Set(r);
@@ -94,7 +95,7 @@ export class ApiService {
       .map((res) => {
         const r = [];
         for (const item of res) {
-          console.log(item['name'])
+          //console.log(item['name'])
           r.push(item['name']);
         }
         return new Set(r);

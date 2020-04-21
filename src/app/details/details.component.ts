@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ApiService } from '../core/api.service';
 
+import {RESTService} from '../rest.service'
+
 /**
  * Lists details of all the matching cars in card list format.
  *
@@ -69,7 +71,7 @@ export class DetailsComponent implements OnInit {
    * @param {ApiService} api
    * @memberof DetailsComponent
    */
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService,private rest :RESTService) { }
 
   /**
    * ngOnInit
@@ -78,6 +80,12 @@ export class DetailsComponent implements OnInit {
    */
   ngOnInit() {
     this.api.getLocations().subscribe(res => this.locations = res);
+    // this.rest.getLocations().subscribe(res => 
+    //   this.locations = res=>
+    //   console.log(this.locations)
+     
+    // )
+    
 
     this.location_input = this.route.snapshot.params['location'];
     this.start_date_input = this.route.snapshot.params['start_date'];
@@ -114,8 +122,8 @@ export class DetailsComponent implements OnInit {
 
       for (const item of this.details) {
         this.selected_item=item.selected
-        console.log(this.selected_item)
-        console.log(item.selected)
+        //console.log(this.selected_item)
+        //console.log(item.selected)
         item.selected = false;
       }
       this.refreshItems();
