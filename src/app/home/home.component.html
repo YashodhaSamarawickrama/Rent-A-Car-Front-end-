@@ -12,8 +12,8 @@
           <div class="input-group input-group-lg">
             <select formControlName="location" class="form-control" placeholder="Location">
               <option [ngValue]="null" disabled>Location</option>
-              <option *ngFor="let item of locations" [value]="item">
-                {{item}}
+              <option *ngFor="let i of locations" [value]="i">
+                {{i}}
               </option>
             </select>
           </div>

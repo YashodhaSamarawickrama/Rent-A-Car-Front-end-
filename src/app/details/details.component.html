@@ -5,11 +5,11 @@
         <div class="row">Location : 
           <select class="form-control col-lg-2 col-md-2 col-sm-1" placeholder="Location" [(ngModel)]="location_input"
             (change)="onChangeLocation($event)" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let item of locations" [value]="item">
-              {{item}}
+            <option *ngFor="let z of locations" [value]="z">
+              {{z}}
             </option>
           </select>
-          Start  Date:
+          Start Date:
           <input type="date" class="form-control col-lg-2 col-md-2 col-sm-1" placeholder="Start date"
             [(ngModel)]="start_date_input" (keyup)="onChangeStartDate($event)" [ngModelOptions]="{standalone: true}">
           End Date:
@@ -74,7 +74,8 @@
         </div>
         <div class="col-md-6 col-sm-12">
           <h5 class="card-title" ng-class="item_name">
-            {{item.name}}
+            <!-- {{item.name}} -->
+            {{item_name}}
             <span class="badge"><i class="fa fa-chair"></i> {{item.seats}}</span>
           </h5>
           <p class="card-text">
@@ -91,7 +92,7 @@
         <div class="col-md-2 col-sm-12">
           <h3 class="d-flex justify-content-center text-green">LKR {{item.price}} per day</h3>
 
-          <button *ngIf="isAvailable(item)" href="#" (click)="handleNewBook()" class="btn btn-primary btn-block"><i class="fa fa-key"></i>
+          <button *ngIf="isAvailable(item)" href="#" class="btn btn-primary btn-block"><i class="fa fa-key"></i>
             Book</button>
           <span *ngIf="!isAvailable(item)" class="btn btn-danger btn-block"><i class="fa fa-times-circle"></i>
             Not Available</span>

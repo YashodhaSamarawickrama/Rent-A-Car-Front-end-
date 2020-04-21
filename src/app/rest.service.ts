@@ -13,48 +13,49 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RESTService {
-  private extractData(res: Response) {
-    let body = res;
-    return body || { };
-  }
+  data:any;
+  item :any;
+  item_name:any;
+  newarray :[];
+  
   locationsfromAPI:any;
 
   constructor(private http: HttpClient) { }
 
+  // private extractData(res: Response) {
+  //   let body = res;
+  //   return body || { };
+  // }
+
   getallVehicleData():Observable<any>{
     // return this.http.get(endpoint + 'vehicles').pipe(map(this.extractData.getJSON()) 
     return this.http.get(endpoint + 'vehicles')
+    .map((res => {
+      console.log(res)
+      return res;
     
+    }))
+  }
+
+  getallLocations():Observable<any>{
+  
+    return this.http.get(endpoint + 'vehicles')
     .map((res => {
       console.log(res)
       const r = [];
       for (const item of Object.keys(res)) {
         //console.log(res[item].location)
         this.locationsfromAPI = res[item].location
-        //console.log(this.locationsfromAPI)
-        //console.log(r.push(item['location']));
-        r.push(item['location']);
+        console.log(this.locationsfromAPI)
+        r.push(res[item].location);
       }
+      // console.log(r)
       // console.log(this.locationsfromAPI)
-      return new Set(r);
-    
+      
+      // return new Set(r);
+      return r
+      
     }))
-  }
-
-  getVehicles():Observable<any>{
-    return this.http.get(endpoint + 'vehicles').pipe(map(this.extractData));
-  }
-
-  getUsers():Observable<any>{
-    return this.http.get(endpoint + 'users').pipe(map(this.extractData));
-  }
-
-  getReservations():Observable<any>{
-    return this.http.get(endpoint + 'reservations').pipe(map(this.extractData));
-  }
-
-  getPayments():Observable<any>{
-    return this.http.get(endpoint + 'payments').pipe(map(this.extractData));
   }
 
   getallUserData():Observable<any>{
@@ -62,17 +63,7 @@ export class RESTService {
     return this.http.get(endpoint + 'users')
     .map((res => {
       console.log(res)
-      const r = [];
-      for (const item of Object.keys(res)) {
-        //console.log(res[item].location)
-        this.locationsfromAPI = res[item].location
-        //console.log(this.locationsfromAPI)
-        //console.log(r.push(item['location']));
-        r.push(item['location']);
-      }
-      // console.log(this.locationsfromAPI)
-      return new Set(r);
-    
+      return res;
     }))
   }
   getallPaymentData():Observable<any>{
@@ -80,17 +71,7 @@ export class RESTService {
     return this.http.get(endpoint + 'payments')
     .map((res => {
       console.log(res)
-      const r = [];
-      for (const item of Object.keys(res)) {
-        //console.log(res[item].location)
-        this.locationsfromAPI = res[item].location
-        //console.log(this.locationsfromAPI)
-        //console.log(r.push(item['location']));
-        r.push(item['location']);
-      }
-      // console.log(this.locationsfromAPI)
-      return new Set(r);
-    
+      return res;
     }))
   }
   getallReservationsData():Observable<any>{
@@ -98,10 +79,25 @@ export class RESTService {
     return this.http.get(endpoint + 'reservations')
     .map((res => {
       console.log(res)
-      //console.log(this.locationsfromAPI)
       return res;
     
     }))
+  }
+  getDetailsFor(location): Observable<any> {
+    return this.http.get(endpoint+'vehicles')
+      .map((res) => {
+        const r = [];
+        for (const item of Object.keys(res)) {
+
+          if (res[item].location === location) {
+              this.item_name = res[item].name
+              console.log(this.item_name)
+              r.push(res[item]);
+          }
+        }
+        console.log(r)
+        return r;
+      });
   }
 }
 

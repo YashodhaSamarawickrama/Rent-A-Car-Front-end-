@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { ApiService } from '../core/api.service';
-
 import {RESTService} from '../rest.service'
 
 /**
@@ -29,9 +27,11 @@ export class DetailsComponent implements OnInit {
   selected_item :any;
   price_of_selected_item:any;
   name_of_the_selected_item:any;
-  noOfDays:any;
+  startdateAsDate :any
+  enddateAsDate  : any
+  diff :any;
+  noofdays :any;
   
-
   // Sub query filter
   query_input = '';
 
@@ -79,20 +79,20 @@ export class DetailsComponent implements OnInit {
    * @memberof DetailsComponent
    */
   ngOnInit() {
-    this.api.getLocations().subscribe(res => this.locations = res);
+    //this.api.getLocations().subscribe(res => this.locations = res);
+    this.rest.getallLocations().subscribe(r => this.locations = r)
     // this.rest.getLocations().subscribe(res => 
     //   this.locations = res=>
     //   console.log(this.locations)
      
     // )
     
-
     this.location_input = this.route.snapshot.params['location'];
     this.start_date_input = this.route.snapshot.params['start_date'];
     this.end_date_input = this.route.snapshot.params['end_date'];
 
     this.refreshDetails();
-    this.handleBook();
+
   }
 
   onChangeLocation($event) {
@@ -109,21 +109,26 @@ export class DetailsComponent implements OnInit {
    * @memberof DetailsComponent
    */
   refreshDetails() {
-    // Update path
+  
+    // Update path if the form is changed later on 
     let path = ['details'];
+
     if (this.location_input && this.location_input.length > 0) {
       path = ['details', this.location_input, this.start_date_input,this.end_date_input];
     }
     this.router.navigate(path);
 
     // Fetch data
-    this.api.getDetailsFor(this.location_input).subscribe((res) => {
+    this.rest.getDetailsFor(this.location_input).subscribe((res) => {
+    //this.api.getDetailsFor(this.location_input).subscribe((res) => {
       this.details = res;
+      console.log(this.details)
 
       for (const item of this.details) {
         this.selected_item=item.selected
         //console.log(this.selected_item)
         //console.log(item.selected)
+        this.item_name=item.name
         item.selected = false;
       }
       this.refreshItems();
@@ -248,19 +253,19 @@ export class DetailsComponent implements OnInit {
     this.sort();
   }
 
-  handleBook(){
-    this.api.getdetailsofbookitem(this.itemname).subscribe((res) => {
-      this.details = res;
+  // handleBook(){
+  //   this.api.getdetailsofbookitem(this.itemname).subscribe((res) => {
+  //     this.details = res;
 
-      for (const item of this.details) {
-        this.selected_item=item.selected
-        console.log(this.selected_item)
-        console.log(item.selected)
-        item.selected = false;
-      }
-      this.refreshItems();
-    });
-  }
+  //     for (const item of this.details) {
+  //       this.selected_item=item.selected
+  //       console.log(this.selected_item)
+  //       console.log(item.selected)
+  //       item.selected = false;
+  //     }
+  //     this.refreshItems();
+  //   });
+  // }
   handleNewBook(){
     
 
