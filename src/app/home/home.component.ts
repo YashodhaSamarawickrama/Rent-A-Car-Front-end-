@@ -35,9 +35,9 @@ export class HomeComponent implements OnInit {
    
     //this.api.getLocations().subscribe(res => this.locations = res);
     this.rest.getallVehicleData().subscribe(res =>this.allVehicleData = res);
-    this.rest.getallUserData().subscribe(res =>this.allUserData = res);
-    this.rest.getallPaymentData().subscribe(res =>this.allPaymentData = res);
-    this.rest.getallReservationsData().subscribe(res =>this.allReservationsData = res);
+    // this.rest.getallUserData().subscribe(res =>this.allUserData = res);
+    // this.rest.getallPaymentData().subscribe(res =>this.allPaymentData = res);
+    // this.rest.getallReservationsData().subscribe(res =>this.allReservationsData = res);
     this.rest.getallLocations().subscribe(r => this.locations = r)
 
   }

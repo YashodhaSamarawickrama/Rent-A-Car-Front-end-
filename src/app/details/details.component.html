@@ -75,7 +75,7 @@
         <div class="col-md-6 col-sm-12">
           <h5 class="card-title" ng-class="item_name">
             <!-- {{item.name}} -->
-            {{item_name}}
+            {{item.name}}
             <span class="badge"><i class="fa fa-chair"></i> {{item.seats}}</span>
           </h5>
           <p class="card-text">
@@ -92,8 +92,10 @@
         <div class="col-md-2 col-sm-12">
           <h3 class="d-flex justify-content-center text-green">LKR {{item.price}} per day</h3>
 
-          <button *ngIf="isAvailable(item)" href="#" class="btn btn-primary btn-block"><i class="fa fa-key"></i>
-            Book</button>
+          <!-- <button *ngIf="isAvailable(item)" href="#" class="btn btn-primary btn-block"><i class="fa fa-key"></i>
+            Book</button> -->
+            <button *ngIf="isAvailable(item)" href="#" class="btn btn-primary btn-block" (click)="book(item._id)"><i class="fa fa-key"></i>
+              Book</button>
           <span *ngIf="!isAvailable(item)" class="btn btn-danger btn-block"><i class="fa fa-times-circle"></i>
             Not Available</span>
 

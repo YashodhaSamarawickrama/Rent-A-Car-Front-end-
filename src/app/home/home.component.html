@@ -23,7 +23,6 @@
               placeholder="Start date"> -->
               Start Date :<input class="form-control col-lg-7 col-md-7 col-sm-12" [(ngModel)]="startDateAsDate" type ="date" [min]="dtToday" formControlName="start_date" placeholder="Start date"> 
               End Date :<input class="form-control col-lg-7 col-md-7 col-sm-12" [(ngModel)]="endDateAsDate" type ="date" [min]="dtToday" formControlName="end_date" placeholder="End date"> 
-
             <button [disabled]="!searchCarForm.valid"
               class="btn btn-success form-control col-lg-5 col-md-5 col-sm-12">Search Cars</button>
           </div>

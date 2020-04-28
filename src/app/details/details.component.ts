@@ -24,6 +24,7 @@ export class DetailsComponent implements OnInit {
   start_date_input;
   end_date_input;
   item_name : any;
+  item_id : any;
   selected_item :any;
   price_of_selected_item:any;
   name_of_the_selected_item:any;
@@ -124,12 +125,14 @@ export class DetailsComponent implements OnInit {
       this.details = res;
       console.log(this.details)
 
-      for (const item of this.details) {
-        this.selected_item=item.selected
+      for (const i of this.details) {
+        // this.selected_item=item.selected
         //console.log(this.selected_item)
         //console.log(item.selected)
-        this.item_name=item.name
-        item.selected = false;
+        this.item_name=i.name
+        console.log(this.item_name)
+        this.item_id=i._id
+        i.selected = false;
       }
       this.refreshItems();
     });
@@ -270,6 +273,31 @@ export class DetailsComponent implements OnInit {
     
 
   }
+
+  book(item_id){
+   
+    this.rest.BookItem(item_id).subscribe((res) => {
+      this.details = res;
+      console.log(this.details)
+
+      for (const item of this.details) {
+        this.selected_item=item.selected
+        //console.log(this.selected_item)
+        //console.log(item.selected)
+        this.item_name=item.name
+        this.item_id=item._id
+        item.selected = true;
+      }
+    })
+    let path = ['vehicles'];
+    if (this.location_input && this.location_input.length > 0) {
+      path = ['vehicles',item_id,this.start_date_input,this.end_date_input];
+    }
+    this.router.navigate(path);
+  }
+
+
+
   /**
    * Returns true if the items week day is today.
    *

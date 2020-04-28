@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
-const endpoint = 'http://kdrentacar.tk:8001/api/'
+//const endpoint = 'http://kdrentacar.tk:8001/api/'
+const endpoint = 'http://localhost:8000/api/'
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -16,16 +18,14 @@ export class RESTService {
   data:any;
   item :any;
   item_name:any;
+  item_id:any;
   newarray :[];
+
   
   locationsfromAPI:any;
 
   constructor(private http: HttpClient) { }
 
-  // private extractData(res: Response) {
-  //   let body = res;
-  //   return body || { };
-  // }
 
   getallVehicleData():Observable<any>{
     // return this.http.get(endpoint + 'vehicles').pipe(map(this.extractData.getJSON()) 
@@ -49,10 +49,7 @@ export class RESTService {
         console.log(this.locationsfromAPI)
         r.push(res[item].location);
       }
-      // console.log(r)
-      // console.log(this.locationsfromAPI)
-      
-      // return new Set(r);
+     
       return r
       
     }))
@@ -88,10 +85,11 @@ export class RESTService {
       .map((res) => {
         const r = [];
         for (const item of Object.keys(res)) {
-
-          if (res[item].location === location) {
+          if (res[item].location === location && res[item].status === true) {
               this.item_name = res[item].name
+              this.item_id = res[item]._id
               console.log(this.item_name)
+              console.log(this.item_id)
               r.push(res[item]);
           }
         }
@@ -99,5 +97,44 @@ export class RESTService {
         return r;
       });
   }
-}
 
+  BookItem(location): Observable<any> {
+    return this.http.get(endpoint+'vehicles')
+      .map((res) => {
+        const r = [];
+        for (const item of Object.keys(res)) {
+          if (res[item].location === location) {
+              this.item_name = res[item].name
+              console.log(this.item_name)
+
+              r.push(res[item]);
+          }
+        }
+        console.log(r)
+        return r;
+      });
+  }
+
+  getVehicleDetailsById(_id):Observable<any>{
+    return this.http.get(endpoint+'vehicles/'+_id)
+      // .map((res)=>{
+      //   console.log(res)
+      //   const r = [];
+      //   for (const item of Object.keys(res)) {
+      //     console.log('inside for')
+      //     console.log(res[item].id)
+      //     if (res[item]._id ==_id) {
+      //       console.log('inside if')
+      //         this.item_name = res[item].name
+      //         console.log(this.item_name)
+
+      //         r.push(res[item]);
+      //     }
+      //   }
+      //   console.log(r)
+      //   return r;
+      // });
+    }
+    
+
+  }

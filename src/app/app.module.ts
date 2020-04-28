@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule,Routes} from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { ApiService } from './core/api.service';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +20,13 @@ import { UserComponent } from './user/user.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { RESTService} from './rest.service';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AlertComponent } from './directives/alert/alert.component';
+import { AuthGuardComponent } from './guards/auth-guard/auth-guard.component' 
+import { AlertService, AuthenticationService, UserService } from '../services';
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,11 @@ import { ReservationComponent } from './reservation/reservation.component';
     UserComponent,
     VehicleComponent,
     PaymentComponent,
-    ReservationComponent
+    ReservationComponent,
+    UserRegisterComponent,
+    UserProfileComponent,
+    AlertComponent,
+    AuthGuardComponent
   ],
 
   imports: [
@@ -47,7 +57,8 @@ import { ReservationComponent } from './reservation/reservation.component';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-
+    
+  
     // Routes
     RouterModule.forRoot([
       { // /
@@ -75,6 +86,10 @@ import { ReservationComponent } from './reservation/reservation.component';
         path: 'aboutus',
         component: AboutComponent
       },
+      { // register us
+        path: 'register',
+        component: UserRegisterComponent
+      },
       { // contactus
         path: 'contactus',
         component: ContactComponent
@@ -82,6 +97,14 @@ import { ReservationComponent } from './reservation/reservation.component';
       { // adminportal
         path: 'adminportal',
         component: AdminportalComponent
+      },
+      { // reservation
+        path: 'reservation/:id',
+        component: ReservationComponent
+      },
+      { //vehicle details with params
+        path: 'vehicles/:_id/:start_date/:end_date',
+        component: VehicleComponent
       },
       { // details with params
         path: 'details/:location/:start_date/:end_date',
@@ -91,7 +114,17 @@ import { ReservationComponent } from './reservation/reservation.component';
   ],
 
   providers: [
-    ApiService
+    ApiService,
+    RESTService,
+    DetailsComponent,
+    AlertService, 
+    AuthenticationService, 
+    UserService,
+    AuthGuardComponent,
+    LoginComponent,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    
   ],
 
   bootstrap: [AppComponent]
