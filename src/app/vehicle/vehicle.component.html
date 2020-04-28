@@ -1,39 +1,201 @@
+<section id="page-title-area" class="section-padding overlay">
+   <div class="container">
+       <div class="row">
+           <!-- Page Title Start -->
+           <div class="col-lg-12">
+               <div class="section-title  text-center">
+                   <h2>Confirm your booking</h2>
+                   <span class="title-line"><i class="fa fa-car"></i></span>
+                   <p>Please recheck your booking details and make the payment</p>
+               </div>
+           </div>
+           <!-- Page Title End -->
+       </div>
+   </div>
+</section>
+<!--== Page Title Area End ==-->
 
-<b><div id="h3"><h3>Booking confirmation</h3></div></b> <br><br>
-  
- <b> You have selected the following vehicle: <br><br></b>
-    <!-- Item code   : </b> {{item_id}} <br> <br> -->
+<!--== Car List Area Start ==-->
+<section id="car-list-area" class="section-padding">
+   <div class="container">
+       <div class="row">
+           <!-- Car List Content Start -->
+           <div class="col-lg-8">
+               <div class="car-details-content">
+                   <h2>{{item_name}} <span class="price">Price per day: <b>{{price_per_Day|number:'.2'}}</b></span></h2>
+                   <div >
+                       <div class="single-car-preview">
+                           <img src="{{item_image}}" alt="JSOFT">
+                       </div>
+                      
+                   </div>
+                   <div class="car-details-info">
+                       <h4>Additional Info</h4>
+                       <p> {{description}}</p>
 
-    <b>Vehicle ID  : </b>{{Vehicle_id}}  <br> <br>
+                       <div class="technical-info">
+                           <div class="row">
+                               <div class="col-lg-6">
+                                   <div class="tech-info-table">
+                                       <table class="table table-bordered">
+                                           <tr>
+                                               <th>Type</th>
+                                               <td>{{vehicle_type}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Fuel</th>
+                                               <td>{{fuel_type}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>Seats</th>
+                                               <td>{{seats}}</td>
+                                           </tr>
+                                           <tr>
+                                               <th>GearBox</th>
+                                               <td>{{transmission_type}}</td>
+                                           </tr>
+                                           <tr>
+                                             <th>Start Date</th>
+                                             <td>{{Starting_Date_from_param}}</td>
+                                         </tr>
+                                         <tr>
+                                          <th>End Date</th>
+                                          <td>{{Ending_Date_from_param}}</td>
+                                      </tr>
+                                      <tr>
+                                       <th>No of Days</th>
+                                       <td>{{noofdays}}</td>
+                                   </tr>
+                                       </table>
+                                   </div>
+                               </div>
 
-    <b>Vehicle name :</b> {{item_name}} <br><br>
+                               <div class="col-lg-6">
+                                   <div class="tech-info-list">
+                                       <ul>
+                                           <li>ABS</li>
+                                           <li>Air Bags</li>
+                                           <li>Bluetooth</li>
+                                           <li>Car Kit</li>
+                                           <li>GPS</li>
+                                           <li>Music</li>
+                                           <li>Bluetooth</li>
+                                           <li>ABS</li>
+                                           <li>GPS</li>
+                                       </ul>
+                                       
+                                       <img class="" src="./assets/payhere.png" alt="Pay here" width="70%">
+                                      
+                                       <h4>TOTAL AMOUNT : RS.{{total|number:'.2'}}</h4>
+                                       
+                                          <div class="input-submit">
+                                              <button (click)="onClick()">Pay Now</button>
+                                              <button type="reset">Cancel</button>
+                                          </div>
+                                     
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
 
-    <b>Vehicle type :</b> {{vehicle_type}} <br><br>
+                       <div class="review-area">
+                          
+                          
+                           <div class="review-form">
+                              
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <!-- Car List Content End -->
+     
+           <!-- Sidebar Area Start -->
+           <div class="col-lg-4">
+               <div class="sidebar-content-wrap m-t-50">
+                   <!-- Single Sidebar Start -->
+                   <div class="single-sidebar">
+                       <h3>For more information</h3>
 
-    <b>Vehicle image :</b> <img class="" src="{{item_image}}" alt="{{item_name}}" width="50%"><br> <br>
+                       <div class="sidebar-body">
+                           <p><i class="fa fa-mobile"></i> +94 777 205506</p>
+                           <p><i class="fa fa-clock-o"></i> Mon - Sat 8.00 - 20.00</p>
+                       </div>
+                   </div>
+                   <!-- Single Sidebar End -->
 
-    <b>Transmission type :</b> {{transmission_type}} <br><br>
+                   <!-- Single Sidebar Start -->
+                   <div class="single-sidebar">
+                       <h3>Rental Tips</h3>
 
-    <b>Fuel type :</b> {{fuel_type}} <br><br>
+                       <div class="sidebar-body">
+                           <ul class="recent-tips">
+                               <li class="single-recent-tips">
+                                   <div class="recent-tip-thum">
+                                       <a href="#"><img src="assets/img/we-do/service1-img.png" alt="JSOFT"></a>
+                                   </div>
+                                   <div class="recent-tip-body">
+                                       <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                       <span class="date">February 5, 2018</span>
+                                   </div>
+                               </li>
 
-    <b>No.of seats :</b> {{seats}} <br><br>
+                               <li class="single-recent-tips">
+                                   <div class="recent-tip-thum">
+                                       <a href="#"><img src="assets/img/we-do/service3-img.png" alt="JSOFT"></a>
+                                   </div>
+                                   <div class="recent-tip-body">
+                                       <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                       <span class="date">February 5, 2018</span>
+                                   </div>
+                               </li>
 
-    <b>Price per day :</b> LKR {{price_per_Day|number:'.2'}}<br><br>
+                               <li class="single-recent-tips">
+                                   <div class="recent-tip-thum">
+                                       <a href="#"><img src="assets/img/we-do/service2-img.png" alt="JSOFT"></a>
+                                   </div>
+                                   <div class="recent-tip-body">
+                                       <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                       <span class="date">February 5, 2018</span>
+                                   </div>
+                               </li>
 
-    <b>Starting Date : </b> {{Starting_Date_from_param}}<br><br>
+                               <li class="single-recent-tips">
+                                   <div class="recent-tip-thum">
+                                       <a href="#"><img src="assets/img/we-do/service3-img.png" alt="JSOFT"></a>
+                                   </div>
+                                   <div class="recent-tip-body">
+                                       <h4><a href="#">How to Enjoy Losses Angeles Car Rentals</a></h4>
+                                       <span class="date">February 5, 2018</span>
+                                   </div>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
+                   <!-- Single Sidebar End -->
 
-    <b>Ending Date : </b>{{Ending_Date_from_param}}<br><br>
+                   <!-- Single Sidebar Start -->
+                   <div class="single-sidebar">
+                       <h3>Connect with us</h3>
 
-    <b>No.of days : </b> {{noofdays}}<br><br><br>
-
-    <b>Total amount payable :</b> LKR {{total|number:'.2'}} <br><br>
-
-
-
-    <b>Make your payment through </b> <img class="" src="./assets/payhere.png" alt="Pay here" width="20%">
-    
-
-
+                       <div class="sidebar-body">
+                           <div class="social-icons text-center">
+                               <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+                               <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                               <a href="#" target="_blank"><i class="fa fa-behance"></i></a>
+                               <a href="#" target="_blank"><i class="fa fa-linkedin"></i></a>
+                               <a href="#" target="_blank"><i class="fa fa-dribbble"></i></a>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- Single Sidebar End -->
+               </div>
+           </div>
+           <!-- Sidebar Area End -->
+       </div>
+   </div>
+</section>
+<!--== Car List Area End ==-->
 
 
 

@@ -27,6 +27,10 @@ import { AlertComponent } from './directives/alert/alert.component';
 import { AuthGuardComponent } from './guards/auth-guard/auth-guard.component' 
 import { AlertService, AuthenticationService, UserService } from '../services';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
+import { PayhereComponent } from './payhere/payhere.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
 
 @NgModule({
   declarations: [
@@ -48,15 +52,20 @@ import { JwtInterceptor, ErrorInterceptor } from './helpers';
     UserRegisterComponent,
     UserProfileComponent,
     AlertComponent,
-    AuthGuardComponent
+    AuthGuardComponent,
+    PayhereComponent
   ],
+  entryComponents:[PayhereComponent],
 
   imports: [
     BrowserModule,
+    MatDialogModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    
     
   
     // Routes
@@ -115,6 +124,8 @@ import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
   providers: [
     ApiService,
+    VehicleComponent,
+    PayhereComponent,
     RESTService,
     DetailsComponent,
     AlertService, 

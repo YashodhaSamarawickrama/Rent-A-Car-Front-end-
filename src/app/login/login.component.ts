@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  message:any
 
   constructor(  private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
                   this.router.navigate([this.returnUrl]);
               },
               error => {
+                  this.message = "Invalid credentials ,please try again"
                   this.alertService.error(error);
                   this.loading = false;
               });

@@ -47,8 +47,8 @@ export class HeaderComponent implements OnInit {
 
       this.islogged = true
       this.username = JSON.parse(localStorage.getItem('currentUser'))
-      console.log(this.username.name)
-      this.name = this.username.name
+      console.log(this.username.firstname)
+      this.name = this.username.firstname
     }
    
 
