@@ -4,9 +4,13 @@ import {DetailsComponent} from '../details/details.component'
 import { ApiService } from '../core/api.service';
 import {RESTService} from '../rest.service';
 import {MatDialog} from '@angular/material/dialog';
-import { PayhereComponent } from '../payhere/payhere.component';
 
-declare const payhere
+//import {payhere} from '../../payhere.js'
+//
+// import {Payhere}from '../payhere/Payhere.js'
+
+ declare const payhere :any
+ 
 @Component({
   selector: 'app-vehicle',
   templateUrl: './vehicle.component.html',
@@ -14,7 +18,7 @@ declare const payhere
 })
 
 export class VehicleComponent implements OnInit {
-  
+  reservation :any;
   item_id ='';
   details: any;
   item_name : any;
@@ -34,7 +38,7 @@ export class VehicleComponent implements OnInit {
   diff :any;
   noofdays :any;
   total:any;
-  description:any;
+  desctiption:any;
   firstnamefromlocalstorage:any;
   lastnamefromlocalstorage:any;
   phonefromlocalstorage:any;
@@ -43,6 +47,10 @@ export class VehicleComponent implements OnInit {
   countryfromlocalstorage:any;
   emailfromlocalstorage:any;
   userfromlocalstorage:any;
+  vehicletoDB:any;
+  username:any;
+  name:any;
+  islogged:any;
 
 
   constructor(private router: Router, 
@@ -77,8 +85,15 @@ export class VehicleComponent implements OnInit {
     this.addressfromlocalstorage = this.userfromlocalstorage.address
     this.cityfromlocalstorage = this.userfromlocalstorage.city
     this.countryfromlocalstorage = this.userfromlocalstorage.country
+    
     this.phonefromlocalstorage = this.userfromlocalstorage.phone
-
+    if(localStorage.getItem('currentUser') != null){
+      this.islogged = true
+      
+      this.username = JSON.parse(localStorage.getItem('currentUser'))
+      console.log(this.username.firstname)
+      this.name = this.username.firstname
+    }
   }
 
   loadVehicleDetailsByID(item_id){
@@ -95,42 +110,76 @@ export class VehicleComponent implements OnInit {
       console.log(res.photo)
       console.log(this.item_image)
       this.Vehicle_id = res.vehicleID;
-      this.description = res.description;
+      this.desctiption = res.desctiption;
       this.price_per_Day = res.price;
+      
       
       this.total = this.noofdays * this.price_per_Day
      
       console.log(this.details)
-
-      
+      this.firstnamefromlocalstorage = this.userfromlocalstorage.firstname
+    this.lastnamefromlocalstorage = this.userfromlocalstorage.lastname
+    this.emailfromlocalstorage = this.userfromlocalstorage.email
+    this.addressfromlocalstorage = this.userfromlocalstorage.address
+    this.cityfromlocalstorage = this.userfromlocalstorage.city
+    this.countryfromlocalstorage = this.userfromlocalstorage.country
+    
+    this.phonefromlocalstorage = this.userfromlocalstorage.phone
+    this.reservation={
+    reservationID:'R001',
+    name:this.firstnamefromlocalstorage,
+    numberPlate:res.numberPlate,
+    startDate:this.startdateAsDate,
+    endDate:this.enddateAsDate,
+    status:"Car will be picked"
+  
+  }
+  this.vehicletoDB={
+    _id:this.item_id,
+    vehicleID:this.Vehicle_id,
+    numberPlate:res.numberPlate,
+    name:this.item_name,
+    photo:this.item_image,
+    price:this.price_per_Day,
+    location:res.location,
+    availability:res.availability,
+    seats:this.seats,
+    fuel_Type:this.fuel_type,
+    transmission:this.transmission_type,
+    car_Type:this.vehicle_type,
+    desctiption:this.desctiption,
+    status:'False'
+  }
   })
 }
 onClick() {
 
-  this.dialog.open(PayhereComponent)
-  
+  // this.dialog.open()
+    
     // Called when user completed the payment. It can be a successful payment or failure
-      // payhere.onCompleted = function onCompleted(orderId) {
-      // console.log("Payment completed. OrderID:" + orderId);
+      payhere.onCompleted = function onCompleted(orderId) {
+      this.addReservation()
+      this.updateVehicle()
+      console.log("Payment completed. OrderID:" + orderId);
       //Note: validate the payment and show success or failure page to the customer
   };
 
   // // Called when user closes the payment without completing
-  //     payhere.onDismissed = function onDismissed() {
+      payhere.onDismissed = function onDismissed() {
   //     //Note: Prompt user to pay again or show an error page
-  //     console.log("Payment dismissed");
-  // };
+      console.log("Payment dismissed");
+  };
 
   // Called when error happens when initializing payment such as invalid parameters
-  //     payhere.onError = function onError(error) {
+      payhere.onError = function onError(error) {
   //     // Note: show an error page
-  //     console.log("Error:"  + error);
-  // };
+      console.log("Error:"  + error);
+  };
 
   // Put the payment variables here
-  payment = {
-      "sandbox": false,
-      "merchant_id": "211379",       // Replace your Merchant ID
+  var payment = {
+      "sandbox": true,
+      "merchant_id": "1211917",       // Replace your Merchant ID
       "return_url": "http://sample.com/return",
       "cancel_url": "http://sample.com/cancel",
       "notify_url": "http://sample.com/notify",
@@ -153,9 +202,26 @@ onClick() {
   };
 
 
-      //payhere.startPayment(payment);
+      payhere.startPayment(payment);
   
+      }
 
-}
+      addReservation() {
+        this.rest.addReservation(this.reservation).subscribe((result) => {
+          console.log("saved")
+        }, (err) => {
+          console.log(err);
+        });
+      }
+
+      updateVehicle(){
+        this.rest.updateVehicle(this.item_id, this.vehicletoDB).subscribe((result) => {
+        }, (err) => {
+          console.log(err);
+        });
+      }
+    
+      }
+
 
   

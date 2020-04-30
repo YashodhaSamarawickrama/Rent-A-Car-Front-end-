@@ -18,8 +18,6 @@ import { ContactComponent } from './contact/contact.component';
 import { AdminportalComponent } from './adminportal/adminportal.component';
 import { UserComponent } from './user/user.component';
 import { VehicleComponent } from './vehicle/vehicle.component';
-import { PaymentComponent } from './payment/payment.component';
-import { ReservationComponent } from './reservation/reservation.component';
 import { RESTService} from './rest.service';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -27,7 +25,6 @@ import { AlertComponent } from './directives/alert/alert.component';
 import { AuthGuardComponent } from './guards/auth-guard/auth-guard.component' 
 import { AlertService, AuthenticationService, UserService } from '../services';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
-import { PayhereComponent } from './payhere/payhere.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
@@ -47,15 +44,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminportalComponent,
     UserComponent,
     VehicleComponent,
-    PaymentComponent,
-    ReservationComponent,
     UserRegisterComponent,
     UserProfileComponent,
     AlertComponent,
     AuthGuardComponent,
-    PayhereComponent
+   
+    
+    
   ],
-  entryComponents:[PayhereComponent],
+  
 
   imports: [
     BrowserModule,
@@ -65,7 +62,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    
+  
     
   
     // Routes
@@ -107,10 +104,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         path: 'adminportal',
         component: AdminportalComponent
       },
-      { // reservation
-        path: 'reservation/:id',
-        component: ReservationComponent
-      },
+      
       { //vehicle details with params
         path: 'vehicles/:_id/:start_date/:end_date',
         component: VehicleComponent
@@ -124,8 +118,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   providers: [
     ApiService,
+    
     VehicleComponent,
-    PayhereComponent,
     RESTService,
     DetailsComponent,
     AlertService, 

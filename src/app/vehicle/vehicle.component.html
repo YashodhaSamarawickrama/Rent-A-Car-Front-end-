@@ -6,7 +6,8 @@
                <div class="section-title  text-center">
                    <h2>Confirm your booking</h2>
                    <span class="title-line"><i class="fa fa-car"></i></span>
-                   <p>Please recheck your booking details and make the payment</p>
+                   <div class="login-btn" *ngIf="islogged == true">Hello {{name}} ,</div>
+                   Please recheck your booking details and make the payment
                </div>
            </div>
            <!-- Page Title End -->
@@ -22,7 +23,7 @@
            <!-- Car List Content Start -->
            <div class="col-lg-8">
                <div class="car-details-content">
-                   <h2>{{item_name}} <span class="price">Price per day: <b>{{price_per_Day|number:'.2'}}</b></span></h2>
+                   <h3>{{item_name}} <span class="price">Price per day: <b>{{price_per_Day|number:'.2'}}</b></span></h3>
                    <div >
                        <div class="single-car-preview">
                            <img src="{{item_image}}" alt="JSOFT">
@@ -30,8 +31,8 @@
                       
                    </div>
                    <div class="car-details-info">
-                       <h4>Additional Info</h4>
-                       <p> {{description}}</p>
+                       <h4>Additional Info:</h4>
+                       <div>{{desctiption}}</div>
 
                        <div class="technical-info">
                            <div class="row">
@@ -89,7 +90,7 @@
                                        <h4>TOTAL AMOUNT : RS.{{total|number:'.2'}}</h4>
                                        
                                           <div class="input-submit">
-                                              <button (click)="onClick()">Pay Now</button>
+                                              <button (click)="onClick()" id="payhere-payment">Pay Now</button>
                                               <button type="reset">Cancel</button>
                                           </div>
                                      

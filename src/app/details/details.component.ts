@@ -32,6 +32,8 @@ export class DetailsComponent implements OnInit {
   enddateAsDate  : any
   diff :any;
   noofdays :any;
+  path2:any;
+  
   
   // Sub query filter
   query_input = '';
@@ -93,6 +95,7 @@ export class DetailsComponent implements OnInit {
     this.end_date_input = this.route.snapshot.params['end_date'];
 
     this.refreshDetails();
+    
 
   }
 
@@ -271,7 +274,6 @@ export class DetailsComponent implements OnInit {
   // }
   handleNewBook(){
     
-
   }
 
   book(item_id){
@@ -290,14 +292,19 @@ export class DetailsComponent implements OnInit {
       }
     })
     let path = ['vehicles'];
-    if (this.location_input && this.location_input.length > 0) {
+    if ((this.location_input && this.location_input.length > 0) && (localStorage.getItem('currentUser') != null)) {
       path = ['vehicles',item_id,this.start_date_input,this.end_date_input];
+      
     }
-    this.router.navigate(path);
+    else{
+      path = ['/login']
+      this.path2=['vehicles'+'/'+item_id+'/'+this.start_date_input+'/'+this.end_date_input]
+      localStorage.setItem('redirectTo',this.path2);
+    }
+
+      this.router.navigate(path);
+    
   }
-
-
-
   /**
    * Returns true if the items week day is today.
    *

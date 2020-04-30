@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
-//const endpoint = 'http://kdrentacar.tk:8001/api/'
-const endpoint = 'http://localhost:8000/api/'
+const endpoint = 'https://kdrentacar.tk:8001/api/'
+//const endpoint = 'http://localhost:8000/api/'
 const httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -136,5 +136,36 @@ export class RESTService {
       // });
     }
     
+    //update vehicle status when booked to not available 
+    updateVehicle(_id,vehicle):Observable<any>{
+      return this.http.put(endpoint+'vehicles/'+_id,JSON.stringify(vehicle),httpOptions).pipe(
+        tap(_ => console.log(`updated product id=${_id}`)),
+        catchError(this.handleError<any>('updateVehicle'))
+      );
+      
+    }
 
+    //make a new reservation when a payment is done
+
+    addReservation(reservation):Observable<any>{
+      console.log(reservation);
+      return this.http.post<any>(endpoint + 'reservations', JSON.stringify(reservation), httpOptions).pipe(
+        tap((reservation) => console.log(`added reservation w/ id=${reservation.id}`)),
+        catchError(this.handleError<any>('addReservation'))
+      );
+    }
+
+    private handleError<T> (operation = 'operation', result?: T) {
+      return (error: any): Observable<T> => {
+    
+        // TODO: send the error to remote logging infrastructure
+        console.error(error); // log to console instead
+    
+        // TODO: better job of transforming error for user consumption
+        console.log(`${operation} failed: ${error.message}`);
+    
+        // Let the app keep running by returning an empty result.
+        return of(result as T);
+      };
+    }
   }
