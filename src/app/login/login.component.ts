@@ -48,20 +48,29 @@ export class LoginComponent implements OnInit {
           return;
       }
 
+      
+
+      // else{
+
       this.loading = true;
       this.authenticationService.login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe(
               data => {
+                if(this.f.email.value == "admin@admin.com" && this.f.password.value == "admin123" ){
                 
-                  this.router.navigate([this.returnUrl]);
+                this.router.navigate(['/adminlogin']);
+                
+              }
+              else{
+                  this.router.navigate([this.returnUrl]);}
               },
               error => {
                   this.message = "Invalid credentials ,please try again"
                   this.alertService.error(error);
                   this.loading = false;
               });
-
+     
                
   }
   

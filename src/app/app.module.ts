@@ -26,7 +26,10 @@ import { AuthGuardComponent } from './guards/auth-guard/auth-guard.component'
 import { AlertService, AuthenticationService, UserService } from '../services';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminVehiclesComponent } from './admin-vehicles/admin-vehicles.component';
+import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component'; 
 
 
 @NgModule({
@@ -48,6 +51,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserProfileComponent,
     AlertComponent,
     AuthGuardComponent,
+    AdminVehiclesComponent,
+    AdminPaymentsComponent,
+    AdminOrdersComponent,
    
     
     
@@ -99,6 +105,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { // contactus
         path: 'contactus',
         component: ContactComponent
+      },
+      { // admin users
+        path: 'users',
+        component: UserComponent
+      },
+      { // admin users
+        path: 'adminvehicles',
+        component: AdminVehiclesComponent
+      },
+      { // admin users
+        path: 'adminreservations',
+        component: AdminOrdersComponent
+      },
+      { // admin users
+        path: 'adminpayments',
+        component: AdminPaymentsComponent
       },
       { // adminportal
         path: 'adminportal',

@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     // this.rest.getallPaymentData().subscribe(res =>this.allPaymentData = res);
     // this.rest.getallReservationsData().subscribe(res =>this.allReservationsData = res);
     //this.rest.getallLocations().subscribe(r => this.locations = r)
-    this.locations=['Kottawa']
+    this.locations=['Piliyandala']
 
   }
 

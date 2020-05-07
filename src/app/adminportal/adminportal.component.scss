@@ -3,4 +3,26 @@ h2.headertekst {
     text-emphasis-style: bold;
   }
 
+.btn{
+  box-sizing: border-box;
+  font-style: bold;
+  
+  backface-visibility: visible;
+  // background-color: green($color: #000000);
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+  background-color:rgb(160, 142, 61); /* Green */
+  border: none;
+  color:black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.btn-div{
+  align-items: center
+}
+
   
