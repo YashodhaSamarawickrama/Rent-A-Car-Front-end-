@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
               data => {
                 if(this.f.email.value == "admin@admin.com" && this.f.password.value == "admin123" ){
                 
-                this.router.navigate(['/adminlogin']);
+                this.router.navigate(['/adminportal']);
                 
               }
               else{

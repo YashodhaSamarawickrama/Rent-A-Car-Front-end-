@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
 import { WeekStatusComponent } from './weekstatus/weekstatus.component';
 import { FooterComponent } from './footer/footer.component';
-import { AdminloginComponent } from './adminlogin/adminlogin.component';
+// import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
@@ -29,7 +29,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminVehiclesComponent } from './admin-vehicles/admin-vehicles.component';
 import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
-import { AdminOrdersComponent } from './admin-orders/admin-orders.component'; 
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
+import { AdminAddNewUserComponent } from './admin-add-new-user/admin-add-new-user.component';
+import { AdminEditUserComponent } from './admin-edit-user/admin-edit-user.component';
+import { AdminEditVehicleComponent } from './admin-edit-vehicle/admin-edit-vehicle.component';
+import { AdminEditPaymentComponent } from './admin-edit-payment/admin-edit-payment.component';
+import { AdminEditReservationComponent } from './admin-edit-reservation/admin-edit-reservation.component';
+import { AdminAddNewVehicleComponent } from './admin-add-new-vehicle/admin-add-new-vehicle.component';
+import { AdminAddNewPaymentComponent } from './admin-add-new-payment/admin-add-new-payment.component';
+import { AdminAddNewReservationComponent } from './admin-add-new-reservation/admin-add-new-reservation.component'; 
 
 
 @NgModule({
@@ -40,7 +48,7 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
     DetailsComponent,
     WeekStatusComponent,
     FooterComponent,
-    AdminloginComponent,
+    // AdminloginComponent,
     LoginComponent,
     AboutComponent,
     ContactComponent,
@@ -54,6 +62,14 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
     AdminVehiclesComponent,
     AdminPaymentsComponent,
     AdminOrdersComponent,
+    AdminAddNewUserComponent,
+    AdminEditUserComponent,
+    AdminEditVehicleComponent,
+    AdminEditPaymentComponent,
+    AdminEditReservationComponent,
+    AdminAddNewVehicleComponent,
+    AdminAddNewPaymentComponent,
+    AdminAddNewReservationComponent,
    
     
     
@@ -86,10 +102,10 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
         path: 'details',
         component: DetailsComponent
       },
-      { // admin login
-        path: 'adminlogin',
-        component: AdminloginComponent
-      },
+      // { // admin login
+      //   path: 'adminlogin',
+      //   component: AdminloginComponent
+      // },
       { // login
         path: 'login',
         component: LoginComponent
@@ -125,6 +141,14 @@ import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
       { // adminportal
         path: 'adminportal',
         component: AdminportalComponent
+      },
+      { // adminportaladduser
+        path: 'adminadduser',
+        component: AdminAddNewUserComponent
+      },
+      { // adminportaledituser
+        path: 'adminedituser/:user._id',
+        component: AdminEditUserComponent
       },
       
       { //vehicle details with params

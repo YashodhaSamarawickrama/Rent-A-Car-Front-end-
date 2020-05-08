@@ -1,28 +1,28 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { AlertService, UserService } from '../../services';
-import { Router, NavigationStart } from '@angular/router';
-
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss']
+  selector: 'app-admin-add-new-user',
+  templateUrl: './admin-add-new-user.component.html',
+  styleUrls: ['./admin-add-new-user.component.scss']
 })
-export class UserRegisterComponent implements OnInit {
+export class AdminAddNewUserComponent implements OnInit {
   private subject = new Subject<any>();
   private keepAfterNavigationChange = false;
   message: any;
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
     private alertService: AlertService) 
-    { router.events.subscribe(event => {
+    {{ router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
           if (this.keepAfterNavigationChange) {
               // only keep for a single location change
@@ -32,7 +32,7 @@ export class UserRegisterComponent implements OnInit {
               this.subject.next();
           }
       }
-  });}
+  });} }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -45,10 +45,7 @@ export class UserRegisterComponent implements OnInit {
       phone: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
   });
-
-  
   }
-  // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
@@ -64,8 +61,8 @@ export class UserRegisterComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  this.message = "Registration successful"
-                  this.router.navigate(['/login']);
+                  this.message = "User added successfully"
+                  this.router.navigate(['/users']);
               },
               error => {
                   console.log(error)
@@ -86,5 +83,5 @@ export class UserRegisterComponent implements OnInit {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
 }
-  
+
 }

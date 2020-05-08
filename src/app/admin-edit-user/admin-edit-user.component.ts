@@ -1,28 +1,40 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { AlertService, UserService } from '../../services';
-import { Router, NavigationStart } from '@angular/router';
-
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.scss']
+  selector: 'app-admin-edit-user',
+  templateUrl: './admin-edit-user.component.html',
+  styleUrls: ['./admin-edit-user.component.scss']
 })
-export class UserRegisterComponent implements OnInit {
+export class AdminEditUserComponent implements OnInit {
   private subject = new Subject<any>();
   private keepAfterNavigationChange = false;
   message: any;
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+  useridtoedit:any
+  detailsofuser:any
+  firstnameofuser:any;
+  lastnameofuser:any;
+  emailofuser:any;
+  phoneofuser:any;
+  addressofuser:any;
+  cityofuser:any;
+  countryofuser:any;
+  passwordofuser:any;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute, 
     private userService: UserService,
     private alertService: AlertService) 
-    { router.events.subscribe(event => {
+    {{ router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
           if (this.keepAfterNavigationChange) {
               // only keep for a single location change
@@ -32,9 +44,10 @@ export class UserRegisterComponent implements OnInit {
               this.subject.next();
           }
       }
-  });}
+  });} }
 
   ngOnInit() {
+    this.useridtoedit = this.route.snapshot.params['user._id']
     this.registerForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -43,12 +56,22 @@ export class UserRegisterComponent implements OnInit {
       city: ['', Validators.required],
       country: ['', Validators.required],
       phone: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      // password: ['', [Validators.required, Validators.minLength(6)]]
   });
-
-  
+  this.userService.getById(this.useridtoedit).subscribe((res) => {
+    this.detailsofuser=res
+    console.log(this.detailsofuser)
+    this.firstnameofuser=this.detailsofuser.firstname
+    this.lastnameofuser=this.detailsofuser.lastname
+    this.emailofuser=this.detailsofuser.email
+    this.phoneofuser=this.detailsofuser.phone
+    this.addressofuser=this.detailsofuser.address
+    this.cityofuser=this.detailsofuser.city
+    this.countryofuser=this.detailsofuser.country
   }
-  // convenience getter for easy access to form fields
+  )
+}
+  
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
@@ -60,12 +83,12 @@ export class UserRegisterComponent implements OnInit {
       }
 
       this.loading = true;
-      this.userService.register(this.registerForm.value)
+      this.userService.update(this.registerForm.value,this.useridtoedit)
           .pipe(first())
           .subscribe(
               data => {
-                  this.message = "Registration successful"
-                  this.router.navigate(['/login']);
+                  this.message = "User details updated successfully"
+                  this.router.navigate(['/users']);
               },
               error => {
                   console.log(error)
@@ -86,5 +109,5 @@ export class UserRegisterComponent implements OnInit {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
 }
-  
+
 }

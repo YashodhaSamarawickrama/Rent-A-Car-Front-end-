@@ -57,7 +57,7 @@ export class RESTService {
 
   getallUserData():Observable<any>{
     // return this.http.get(endpoint + 'vehicles').pipe(map(this.extractData.getJSON()) 
-    return this.http.get(endpoint + 'users')
+    return this.http.get('https://kdrentacar.tk:8001/users')
     .map((res => {
       console.log(res)
       return res;
@@ -154,6 +154,9 @@ export class RESTService {
         catchError(this.handleError<any>('addReservation'))
       );
     }
+
+  
+
 
     private handleError<T> (operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {

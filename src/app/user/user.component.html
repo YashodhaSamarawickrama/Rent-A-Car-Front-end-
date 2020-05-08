@@ -1,3 +1,59 @@
-<p>
-  user works!
-</p>
+<h3>All registered users</h3>
+
+<button class="btn" [routerLink]="['/adminadduser']" ><b> + </b>Add new user</button >
+<br>
+<br>
+<table border="1">
+<tr>
+  <th>
+    First name
+  </th>
+  <th>
+    Last name
+  </th>
+  <th>
+    Email
+  </th>
+  <th>
+    Phone
+  </th>
+  <th>
+    Address
+  </th>
+  <th>
+    City
+  </th>
+  <th>
+    Country
+  </th>
+  <th></th>
+</tr>
+<tr *ngFor="let user of allUserData">
+<td>
+  {{user.firstname}}
+</td>
+<td>
+  {{user.lastname}}
+</td>
+<td>
+  {{user.email}}
+</td>
+<td>
+  {{user.phone}}
+</td>
+<td>
+  {{user.address}}
+</td>
+<td>
+  {{user.city}}
+</td>
+<td>
+  {{user.country}}
+</td>
+<td>
+  <button href="#" class="btn-update" [routerLink]="['/adminedituser',user._id]">Edit</button>
+  <button href="#" class="btn-del" (click)="clickMethod(user._id)">Delete</button>
+  <!-- <button href="#" class="btn-del" (click)="delete(user._id)">Delete</button> -->
+</td>
+</tr>
+</table>

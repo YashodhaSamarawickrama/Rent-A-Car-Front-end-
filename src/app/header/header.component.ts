@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,NavigationEnd } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
-import { AdminloginComponent } from '../adminlogin/adminlogin.component';
+// import { AdminloginComponent } from '../adminlogin/adminlogin.component';
 import { LoginComponent } from '../login/login.component';
 import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';

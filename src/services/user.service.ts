@@ -12,18 +12,18 @@ export class UserService {
     }
 
     getById(id: number) {
-        return this.http.get(`https://kdrentacar.tk:8001/users` + id);
+        return this.http.get(`https://kdrentacar.tk:8001/users/` + id);
     }
 
     register(user: User) {
         return this.http.post(`https://kdrentacar.tk:8001/users/register`, user);
     }
 
-    update(user: User) {
-        return this.http.put(`https://kdrentacar.tk:8001/users` + user.id, user);
+    update(user: User,user_id:string) {
+        return this.http.put(`https://kdrentacar.tk:8001/users/`+user_id, user);
     }
 
     delete(id: number) {
-        return this.http.delete(`https://kdrentacar.tk:8001/users` + id);
+        return this.http.delete(`https://kdrentacar.tk:8001/users/` + id);
     }
 }

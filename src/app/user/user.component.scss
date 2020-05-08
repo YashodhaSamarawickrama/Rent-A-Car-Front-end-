@@ -1,0 +1,16 @@
+.btn{
+    box-sizing: border-box;
+    font-style: bold;
+    
+    backface-visibility: visible;
+  
+    background-color:rgb(160, 142, 61); /* Green */
+    border: white;
+    color:black;
+    padding: 5px 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 1px;
+    font-size: 14px;
+  }
